@@ -23,6 +23,22 @@ public class DBconnection {
         password = "admin123";
         url = "jdbc:mysql://localhost:3306/world";
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url,name,password);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DBconnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    // over loading the constructor
+    
+        public DBconnection(String name, String password){
+        // get connection fr
+        this.name = name;
+        this.password = password;
+        url = "jdbc:mysql://localhost:3306/world";
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url,name,password);
             
@@ -43,6 +59,23 @@ public class DBconnection {
         }
         return true;
         
+    }
+    public static void main(String[] args) throws SQLException{
+
+//     DBconnection db = new DBconnection();
+//     Connection conn = db.getConnection();
+//     Statement st = conn.createStatement();
+//     ResultSet rs = st.executeQuery("SELECT * FROM city LIMIT 10");
+//     while(rs.next()){
+//         System.out.println(rs.getString("Name"));
+//     }
+//     
+//     
+//     
+//     db.closeConnection();
+     
+     
+     
     }
     
 }

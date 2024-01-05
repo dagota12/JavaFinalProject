@@ -31,7 +31,8 @@ public class Menu extends javax.swing.JFrame {
         signup_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximizedBounds(new java.awt.Rectangle(0, 0, 434, 332));
+        setTitle("customer login or signup");
+        setMaximizedBounds(new java.awt.Rectangle(600, 300, 434, 332));
         setResizable(false);
 
         customer_name1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -95,6 +96,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signup_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signup_btnActionPerformed
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_signup_btnActionPerformed
 
@@ -133,6 +135,7 @@ public class Menu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Menu().setVisible(true);
             }
