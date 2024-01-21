@@ -20,15 +20,6 @@ import org.json.JSONObject;
  */
 public class Buy extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -55,7 +46,6 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 
         // Retrieve the value of the "username" field from the JSON
         String username = jsonObject.getString("name");
-        System.out.println("username");
         out.println("<h1>Hi " + username + "</h1>");
         out.println("</body>");
         out.println("</html>");
@@ -71,11 +61,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
