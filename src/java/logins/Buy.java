@@ -80,6 +80,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             throws ServletException, IOException {
         processRequest(request, response);
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+    }
 
     /**
      * Returns a short description of the servlet.

@@ -4,6 +4,7 @@
  */
 package logins;
 
+import DAO.ProductsDao;
 import java.io.IOException;
 /** java.io.IOException
  * javax.servlet.servletException
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
+import objects.Product;
 
 /**
  *
@@ -70,7 +73,7 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-            out.println("hoaoao");
+            out.println("not Authorized");
         
         }
        // processRequest(request, response);
@@ -108,6 +111,14 @@ public class Login extends HttpServlet {
             if(rs.next()){
                 RequestDispatcher dispac = request.getRequestDispatcher("myJsp.jsp");
                 request.getSession().setAttribute("user", user_name);
+                
+                List<String> myList = new ArrayList<>();
+                myList.add("mine is blur");
+                myList.add("Item 2");
+                myList.add("Item 3");
+                ArrayList<Product> prods = ProductsDao.getProducts();
+                request.setAttribute("myList", prods);
+                
                 dispac.forward(request, response);
             }else{
                 out.println("Wrong Name");

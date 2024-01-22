@@ -9,9 +9,21 @@ package objects;
  * @author BitCom Tech
  */
 public class Product {
-    String name;
-    double price;
-    String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    public String name;
+    public double price;
+    public String description;
 
     public Product(String name, double price, String description) {
         this.name = name;
@@ -23,7 +35,10 @@ public class Product {
     public String toString() {
         return "Product{" + "name=" + name + ", price=" + price + '}';
     }
-    
+    public static void main(String[] args) {
+        Product p = new Product("a",4,"jhk");
+        System.out.println(p.price);
+    }
 
 
     
