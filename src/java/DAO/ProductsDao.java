@@ -26,14 +26,17 @@ public class ProductsDao {
         ArrayList<Product> list = new ArrayList<>();
         Statement statement = connection.createStatement();
        
-        ResultSet rs = statement.executeQuery("SELECT * FROM products");
-        while(rs.next()){
-            String name = rs.getString("product_name");
-            float price = Math.round((float)rs.getFloat("price"));
-            String desc = rs.getString("description");
+        ResultSet result = statement.executeQuery("SELECT * FROM products");
+        while(result.next()){
+            String name = result.getString("product_name");
+            float price = Math.round((float)result.getFloat("price"));
+            String desc = result.getString("description");
             
             list.add(new Product(name,price,desc));          
         }
+            statement.close();
+            result.close();
+            DBConnection.closeConnection();        
         return list;
     }
     public static void main(String[] args) throws SQLException {

@@ -4,9 +4,12 @@
  */
 package logins;
 
+import DAO.CustomerDao;
 import DAO.ProductsDao;
+import connection.DBConnection;
 import java.io.IOException;
-/** java.io.IOException
+/** 
+ * java.io.IOException
  * javax.servlet.servletException
  * javax.servlet.annotation,httpServlet,HttpServletRequest,HttpServletResponse
 */
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
+import objects.Customer;
 import objects.Product;
 
 /**
@@ -58,15 +63,6 @@ public class Login extends HttpServlet {
       
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -79,49 +75,35 @@ public class Login extends HttpServlet {
        // processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         PrintWriter out;
         out = response.getWriter();
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
             String user_name = request.getParameter("name");
-            String url,name,pwd;
-            name = "root";
-            pwd = "admin123";
-            url = "jdbc:mysql://localhost:3306/shoppingSystem";
-            Connection con = DriverManager.getConnection(url,name,pwd);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM customers WHERE customer_id= ?;");
-            ps.setString(1, request.getParameter("name"));
-            ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
+            String password = request.getParameter("password");
+//            Connection connection = DBConnection.getConnection();
+//            String query = "SELECT * FROM customers WHERE customer_id= ? AND password_ = ?;";
+//            PreparedStatement statement = connection.prepareStatement(query);
+//            statement.setString(1, user_name);
+//            statement.setString(2, password);
+//            System.out.println(password);
+//            ResultSet result = statement.executeQuery();
+            Customer customer = CustomerDao.getCustomer(user_name, password);
+            if(customer != null){
                 RequestDispatcher dispac = request.getRequestDispatcher("myJsp.jsp");
-                request.getSession().setAttribute("user", user_name);
                 
-                List<String> myList = new ArrayList<>();
-                myList.add("mine is blur");
-                myList.add("Item 2");
-                myList.add("Item 3");
-                ArrayList<Product> prods = ProductsDao.getProducts();
-                request.setAttribute("myList", prods);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("loggedIn", true);
+                session.setAttribute("user_name", user_name);
+                
+                ArrayList<Product> products = ProductsDao.getProducts();
+                request.setAttribute("products", products);
                 
                 dispac.forward(request, response);
             }else{
-                out.println("Wrong Name");
+                out.println("Wrong <i>user-name</i> or <b>password</b>");
             }
             
 //        String password = request.getParameter("password");
@@ -139,6 +121,10 @@ public class Login extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
+    public static boolean validate_customer(String use){
+    
+    return false;
+    }
 
 }
