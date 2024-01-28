@@ -65,9 +65,30 @@ public class Profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Customer form_customer = this.createCustomerFromRequest(request);
+        CustomerDao.updateCustomer(form_customer, (String) request.getSession().getAttribute("user_name"));
+        response.sendRedirect("profile");
     }
+     
+    private Customer createCustomerFromRequest(HttpServletRequest request) {
+        // Retrieve parameters from the request
+        String name = request.getParameter("name");
+        String city = request.getParameter("city");
+        String phone = request.getParameter("phone");
+        String gender = request.getParameter("gender");
+        String password = request.getParameter("password");
+        
+        // Parse age from the request and handle any potential exceptions
+        int age = 0;
+        try {
+            age = Integer.parseInt(request.getParameter("age"));
+        } catch (NumberFormatException e) {
+            System.out.println("Number ERROR on: Age");
+        }
 
+        // Create and return a new Customer object
+        return new Customer(name, city, phone, gender, password, age);
+    }
     @Override
     public String getServletInfo() {
         return "Short description";

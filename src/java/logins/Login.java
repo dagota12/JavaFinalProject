@@ -6,7 +6,6 @@ package logins;
 
 import DAO.CustomerDao;
 import DAO.ProductsDao;
-import connection.DBConnection;
 import java.io.IOException;
 /** 
  * java.io.IOException
@@ -32,7 +31,7 @@ import objects.Product;
  *
  * @author Dag
  */
-@WebServlet(name = "Login", urlPatterns = {"/login"})
+@WebServlet(name = "Login", urlPatterns = {"/dashboard"})
 public class Login extends HttpServlet {
 
     /**
@@ -66,11 +65,23 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        try (PrintWriter out = response.getWriter()) {
-            out.println("not Authorized");
-        
+        if((boolean)request.getSession(true).getAttribute("loggedIn")){
+            ArrayList<Product> products = new ArrayList<>();
+            try {
+               // System.out.println(request.getSession(true).getAttribute("loggedIn"));
+                products = ProductsDao.getProducts();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("products", products);         
+            RequestDispatcher dispacher = request.getRequestDispatcher("myJsp.jsp");
+            dispacher.forward(request,response);
+        }else{
+            response.setContentType("text/html;charset=UTF-8");
+
+            try (PrintWriter out = response.getWriter()) {
+                out.println("not Authorized");
+            }
         }
        // processRequest(request, response);
     }
@@ -83,14 +94,8 @@ public class Login extends HttpServlet {
         try {
             String user_name = request.getParameter("name");
             String password = request.getParameter("password");
-//            Connection connection = DBConnection.getConnection();
-//            String query = "SELECT * FROM customers WHERE customer_id= ? AND password_ = ?;";
-//            PreparedStatement statement = connection.prepareStatement(query);
-//            statement.setString(1, user_name);
-//            statement.setString(2, password);
-//            System.out.println(password);
-//            ResultSet result = statement.executeQuery();
             Customer customer = CustomerDao.getCustomer(user_name, password);
+            
             if(customer != null){
                 RequestDispatcher dispac = request.getRequestDispatcher("myJsp.jsp");
                 
@@ -103,7 +108,8 @@ public class Login extends HttpServlet {
                 
                 dispac.forward(request, response);
             }else{
-                out.println("Wrong <i>user-name</i> or <b>password</b>");
+                
+                out.println("Wrong user-name or password");
             }
             
 //        String password = request.getParameter("password");

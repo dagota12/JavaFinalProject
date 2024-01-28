@@ -54,6 +54,7 @@ public class CustomerDao {
         if(result.next()){
             return getCustomerObj(result);
         }
+        DBConnection.closeConnection();
         return null;
     
     }
@@ -68,6 +69,7 @@ public class CustomerDao {
         if(result.next()){
             return getCustomerObj(result);
         }
+        DBConnection.closeConnection();
         return null;
         
     
@@ -75,7 +77,7 @@ public class CustomerDao {
 public static Customer updateCustomer(Customer new_customer,String user_name) {
         connection = DBConnection.getConnection();
         // SQL query to update customer information
-        String updateQuery = "UPDATE customer SET customer_name=?, age=?, gender=?, phone=?, city=? WHERE customer_id=?";
+        String updateQuery = "UPDATE customers SET customer_name=?, age=?, gender=?, phone=?, city=? WHERE customer_id=?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
             // Set parameters for the update query
@@ -88,7 +90,7 @@ public static Customer updateCustomer(Customer new_customer,String user_name) {
 
             // Execute the update query
             int rowsUpdated = preparedStatement.executeUpdate();
-
+            DBConnection.closeConnection();
             if (rowsUpdated > 0) {
                 // Successfully updated the customer, return the updated customer
                 return new_customer;

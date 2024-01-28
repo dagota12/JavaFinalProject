@@ -11,6 +11,16 @@ import java.util.ArrayList;
  */
 public class Customer {
 
+    public Customer(String name, String city, String phone, String gender, String password, int age) { 
+        this.name = name;
+        this.city = city;
+        this.phone = phone;
+        this.gender = gender;
+        this.password = password;
+        this.age = age;
+    
+    }
+
     public String getName() {
         return name;
     }

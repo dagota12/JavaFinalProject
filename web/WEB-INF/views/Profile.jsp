@@ -34,26 +34,32 @@
         </style>
     </head>
     <body>
-         <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
-    <a class="navbar-brand" href="#" style="font-weight: 500;">Pick <span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
+<nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
+    <a class="navbar-brand" href="#" style="font-weight: 500; font-size: 1.5rem;">
+        Pick <span class="text-success font-weight-bold" style="font-weight: 700;">UP</span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active ">
-          <a class="nav-link" href="dashboard">Home</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout" style="color: #d9534f;">Logout</a>
+            </li>
+        </ul>
     </div>
-  </nav>
+</nav>
+
         <section class="container mt-3">
             <div class="row">
           <div class="col-lg-4">
@@ -134,7 +140,7 @@
                   <form action="profile" method="POST">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                        <input  name="name" type="text" class="form-control" id="name" placeholder="Enter your name" required>
                     </div>
 <!--                    <div class="form-group">
                         <label for="id">ID:</label>
@@ -142,26 +148,26 @@
                     </div>-->
                     <div class="form-group">
                         <label for="city">City:</label>
-                        <input type="text" class="form-control" id="city" placeholder="Enter your city">
+                        <input  name="city" type="text" class="form-control" id="city" placeholder="Enter your city">
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone:</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                        <input name="phone" type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender:</label>
-                        <select class="form-control" id="gender">
+                        <select name="gender" class="form-control" id="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password">
                     </div>
                     <div class="form-group">
                         <label for="age">Age:</label>
-                        <input type="number" class="form-control" id="age" placeholder="Enter your age">
+                        <input  name="age" type="number" class="form-control" id="age" placeholder="Enter your age">
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
