@@ -122,10 +122,10 @@
         </div>
         </section>
     <!--edit profile form template-->
-        <div id="profileForm" class="container w-50" style="width: clamp(300px,50%,500px);">
+        <div id="profileForm" class="container" style="width: clamp(300px,50%,500px);">
           
       
-          <div  class="card">
+          <div  class="card w-full">
               <div class="card-body">
                   <button type="button" class="close" aria-label="Close" onclick="toggleForm()">
                       <span aria-hidden="true">&times;</span>

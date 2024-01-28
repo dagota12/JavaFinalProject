@@ -21,14 +21,21 @@ public class Product {
     public String getDescription() {
         return description;
     }
+    public int getId() {
+        return id;
+    }
     public String name;
     public double price;
     public String description;
+    public int id;
 
-    public Product(String name, double price, String description) {
+    public Product(String name, double price, String description,int id) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.id = id;
+        
+        
     }
 
     @Override
@@ -36,8 +43,8 @@ public class Product {
         return "Product{" + "name=" + name + ", price=" + price + '}';
     }
     public static void main(String[] args) {
-        Product p = new Product("a",4,"jhk");
-        System.out.println(p.price);
+        Product p = new Product("a",4,"jhk",3);
+        System.out.println(p.id);
     }
 
 

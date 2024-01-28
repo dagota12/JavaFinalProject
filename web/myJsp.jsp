@@ -37,11 +37,18 @@
     </style>
     </head>
     <body class="bg-light">
+        <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
+            
     <a class="navbar-brand" href="#" style="font-weight: 500;">Pick <span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
+              <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal"
+               data-target="#staticBackdrop">
+                <i class="fas fa-shopping-cart total-count"></i> Cart
+            </button>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -55,7 +62,9 @@
           <a class="nav-link" href="#">About</a>
         </li>
       </ul>
+
     </div>
+
   </nav>
 
         <h4>Store</h4>
@@ -65,26 +74,55 @@
       <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
             <c:forEach var="product" items="${products}">
 
-         <div class="col">
-            <div class="card h-100 shadow-sm">
-               <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="..."> 
-               <div class="card-body">
-                  <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">${product.name}</span> <span class="float-end price-hp">${product.price}&euro;</span> </div>
-                  <h5 class="card-title">${product.description}</h5>
-                  <div class="text-center my-4"> <a href="#" class="btn btn-warning">Add to Cart</a> </div>
-               </div>
-            </div>
+<div class="col">
+   <div class="card h-100 shadow-sm">
+      <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
+      <div class="card-body">
+         <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-primary">${product.name}</span>
+            <span class="float-end price-hp">${product.price}&euro;</span>
          </div>
+         <h5 class="card-title">${product.description}</h5>
+         <div class="text-center my-4">
+            <button class="btn btn-warning add-to-cart default-btn" data-name="${product.name}" data-product="${product.id}" data-price="${product.price}">Add to Cart</button>
+         </div>
+      </div>
+   </div>
+</div>
       
             </c:forEach>
     </div>
    </div>
 </main>
-
-        <input type="text" class="name"/>
-
-        <button class="btn">oma${s}</button>
+        
+        <!--cart model-->
+        <!--  end of your HTML body -->
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Your Cart</h5>
+                  <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <table class="show-cart table">
+        
+                  </table>
+                  <div class="grand-total">Total price: ₹<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
+                </div>
+            </div>
+         </div>
+      </div>
         <!--scripts-->
+        
         <script src="boot/jquery-3.7.1.min.js" type="text/javascript"></script>
         <script src="boot/popper.min.js" type="text/javascript"></script>
         <script src="boot/bootstrap.min.js" type="text/javascript"></script>        
