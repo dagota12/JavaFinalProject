@@ -31,7 +31,7 @@ import objects.Product;
  *
  * @author Dag
  */
-@WebServlet(name = "Login", urlPatterns = {"/dashboard"})
+@WebServlet(name = "Login", urlPatterns = {"/dashboard","/logout"})
 public class Login extends HttpServlet {
 
     /**
@@ -65,26 +65,16 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if((boolean)request.getSession(true).getAttribute("loggedIn")){
-            ArrayList<Product> products = new ArrayList<>();
-            try {
-               // System.out.println(request.getSession(true).getAttribute("loggedIn"));
-                products = ProductsDao.getProducts();
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.setAttribute("products", products);         
-            RequestDispatcher dispacher = request.getRequestDispatcher("myJsp.jsp");
-            dispacher.forward(request,response);
-        }else{
-            response.setContentType("text/html;charset=UTF-8");
+        String urlPattern = request.getServletPath();
 
-            try (PrintWriter out = response.getWriter()) {
-                out.println("not Authorized");
-            }
+        if (urlPattern.equals("/logout")) {
+        processLogout(request,response);
+        }else{
+            processLogin(request, response);
         }
        // processRequest(request, response);
     }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -97,7 +87,7 @@ public class Login extends HttpServlet {
             Customer customer = CustomerDao.getCustomer(user_name, password);
             
             if(customer != null){
-                RequestDispatcher dispac = request.getRequestDispatcher("myJsp.jsp");
+                RequestDispatcher dispacher = request.getRequestDispatcher("myJsp.jsp");
                 
                 HttpSession session = request.getSession(true);
                 session.setAttribute("loggedIn", true);
@@ -106,10 +96,14 @@ public class Login extends HttpServlet {
                 ArrayList<Product> products = ProductsDao.getProducts();
                 request.setAttribute("products", products);
                 
-                dispac.forward(request, response);
+                dispacher.forward(request, response);
             }else{
+               String message = "Wrong User-Name Or Password";
+               request.setAttribute("message", message);
+               RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/403.jsp");
+               dispatcher.forward(request, response);
                 
-                out.println("Wrong user-name or password");
+                //out.println("Wrong user-name or password");
             }
             
 //        String password = request.getParameter("password");
@@ -131,6 +125,36 @@ public class Login extends HttpServlet {
     public static boolean validate_customer(String use){
     
     return false;
+    }
+
+    private void processLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            HttpSession session = request.getSession(false); // Get the session without creating a new one if it doesn't exist
+                if(session != null && session.getAttribute("loggedIn") != null){
+            ArrayList<Product> products = new ArrayList<>();
+            try {
+              
+                products = ProductsDao.getProducts();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("products", products);         
+            RequestDispatcher dispacher = request.getRequestDispatcher("myJsp.jsp");
+            dispacher.forward(request,response);
+        }else{
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/403.jsp");
+            request.setAttribute("message", "Not AUTHORIZED please login first!");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void processLogout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().invalidate(); // Invalidate the user session
+        try { 
+            response.sendRedirect("/WebApplication1");
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

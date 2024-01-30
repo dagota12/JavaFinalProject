@@ -11,6 +11,11 @@ import java.util.ArrayList;
  */
 public class Customer {
 
+    @Override
+    public String toString() {
+        return "Customer{" + "name=" + name + ", id=" + id + ", city=" + city + ", phone=" + phone + ", gender=" + gender + ", password=" + password + ", age=" + age + '}';
+    }
+
     public Customer(String name, String city, String phone, String gender, String password, int age) { 
         this.name = name;
         this.city = city;
@@ -28,7 +33,9 @@ public class Customer {
     public String getId() {
         return id;
     }
-
+    public String getPassword() {
+      return this.password;
+    }
     public String getCity() {
         return city;
     }
@@ -60,12 +67,12 @@ public class Customer {
     
     public Customer(String name, String password){
         this.password = password;
-        this.name = name;
+        this.id = name;
     }
-    @Override
-    public String toString(){
-        return "Custumer: "+this.name+"["+this.password+"]";
-    }
+//    @Override
+//    public String toString(){
+//        return "Custumer: "+this.name+"["+this.password+"]";
+//    }
     //for example purpose
     public static void main(String[] args) throws ClassNotFoundException {
         Customer c = new Customer("Jhon","123");
@@ -74,5 +81,5 @@ public class Customer {
         arr.add(c);
         System.out.println(arr);
     }
-    
+
 }
