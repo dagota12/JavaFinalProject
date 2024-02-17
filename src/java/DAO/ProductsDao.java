@@ -36,7 +36,7 @@ public class ProductsDao {
         }
             statement.close();
             result.close();
-            DBConnection.closeConnection();        
+            DBConnection.closeConnection();
         return list;
     }
     public static void main(String[] args) throws SQLException {

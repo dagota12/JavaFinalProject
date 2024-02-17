@@ -40,7 +40,7 @@
         <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
             
-    <a class="navbar-brand" href="#" style="font-weight: 500;">Pick <span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
+    <a class="navbar-brand" href="#" style="font-weight: 500;">Pick<span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
               <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal"
                data-target="#staticBackdrop">
                 <i class="fas fa-shopping-cart total-count"></i> Cart
@@ -57,6 +57,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="orders">Orders</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -87,7 +90,7 @@
          </div>
          <h5 class="card-title">${product.description}</h5>
          <div class="text-center my-4">
-            <button class="btn btn-warning add-to-cart default-btn" data-name="${product.name}" data-product="${product.id}" data-price="${product.price}">Add to Cart</button>
+            <button class="btn btn-warning add-to-cart default-btn" data-name="${product.name}" data-id = "${product.id}" data-price="${product.price}">Add to Cart</button>
          </div>
       </div>
    </div>
@@ -118,14 +121,25 @@
                   <div class="grand-total">Total price: ₹<span class="total-cart"></span></div>
                 </div>
                 <div class="modal-footer">
+                  <button type="button" class="btn btn-success" id="buy">Buy</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
                 </div>
             </div>
          </div>
       </div>
+      <!--alert modal-->
+      <div id="alertContainer" class="alert position-fixed d-none top-0" role="alert">
+  <strong id="alertMessage"> hello world</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
         <!--scripts-->
-        
+        <script>
+            var userId = '<%= session.getAttribute("user_name") %>';
+        </script>
         <script src="boot/jquery-3.7.1.min.js" type="text/javascript"></script>
         <script src="boot/popper.min.js" type="text/javascript"></script>
         <script src="boot/bootstrap.min.js" type="text/javascript"></script>        

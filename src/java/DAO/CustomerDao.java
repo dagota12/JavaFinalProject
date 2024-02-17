@@ -83,8 +83,8 @@ public class CustomerDao {
 public static Customer updateCustomer(Customer new_customer,String user_name) {
         connection = DBConnection.getConnection();
         // SQL query to update customer information
-        String updateQuery = "UPDATE customers SET customer_name=?, age=?, gender=?, phone=?, city=? WHERE customer_id=?";
-
+        String updateQuery = "UPDATE customers SET customer_name=?, age=?, gender=?, phone=?, city=?,password_ =? WHERE customer_id=?";
+          System.out.println(new_customer);
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
             // Set parameters for the update query
             preparedStatement.setString(1, new_customer.getName());
@@ -92,7 +92,8 @@ public static Customer updateCustomer(Customer new_customer,String user_name) {
             preparedStatement.setString(3, new_customer.getGender());
             preparedStatement.setString(4, new_customer.getPhone());
             preparedStatement.setString(5, new_customer.getCity());
-            preparedStatement.setString(6, user_name);
+            preparedStatement.setString(6, new_customer.getPassword());
+            preparedStatement.setString(7, user_name);
 
             // Execute the update query
             int rowsUpdated = preparedStatement.executeUpdate();
@@ -118,6 +119,7 @@ public static boolean insertCustomer(Customer new_customer) {
     if (connection == null) {
         return false;
     }
+    System.out.println(new_customer);
     
     // Prepare the SQL statement
     String sql = "INSERT INTO customers (customer_id, customer_name, password_, age, gender, phone, city) " +

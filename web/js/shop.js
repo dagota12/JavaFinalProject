@@ -7,7 +7,8 @@
 
     cart = [];
 
-    function Item(name, price, count) {
+    function Item(id,name, price, count) {
+      this.id = id;
       this.name = name;
       this.price = price;
       this.count = count;
@@ -30,18 +31,18 @@
     var obj = {};
 
     // Add to cart
-    obj.addItemToCart = function (name, price, count) {
+    obj.addItemToCart = function (id,name, price, count) {
       for (var item in cart) {
-        if (cart[item].name === name) {
+        if (cart[item].id === id) {
           cart[item].count++;
           saveCart();
           return;
         }
       }
-      var item = new Item(name, price, count);
+      var item = new Item(id,name, price, count);
       cart.push(item);
       saveCart();
-    }
+    };
     // Set count from item
     obj.setCountForItem = function (name, count) {
       for (var i in cart) {
@@ -63,7 +64,7 @@
         }
       }
       saveCart();
-    }
+    };
 
     // Remove all items from cart
     obj.removeItemFromCartAll = function (name) {
@@ -74,13 +75,13 @@
         }
       }
       saveCart();
-    }
+    };
 
     // Clear cart
     obj.clearCart = function () {
       cart = [];
       saveCart();
-    }
+    };
 
     // Count cart 
     obj.totalCount = function () {
@@ -89,7 +90,7 @@
         totalCount += cart[item].count;
       }
       return totalCount;
-    }
+    };
 
     // Total cart
     obj.totalCart = function () {
@@ -98,22 +99,22 @@
         totalCart += cart[item].price * cart[item].count;
       }
       return Number(totalCart.toFixed(2));
-    }
+    };
 
     // List cart
     obj.listCart = function () {
       var cartCopy = [];
-      for (i in cart) {
+      for (const i in cart) {
         item = cart[i];
         itemCopy = {};
-        for (p in item) {
+        for (const p in item) {
           itemCopy[p] = item[p];
         }
         itemCopy.total = Number(item.price * item.count).toFixed(2);
-        cartCopy.push(itemCopy)
+        cartCopy.push(itemCopy);
       }
       return cartCopy;
-    }
+    };
     return obj;
   })();
 
@@ -123,8 +124,9 @@
     // alert('working');
     event.preventDefault();
     var name = $(this).data('name');
+    var id = $(this).data('id');
     var price = Number($(this).data('price'));
-    shoppingCart.addItemToCart(name, price, 1);
+    shoppingCart.addItemToCart(id,name, price, 1);
     displayCart();
   });
 
@@ -163,10 +165,10 @@
   // Delete item button
 
   $('.show-cart').on("click", ".delete-item", function (event) {
-    var name = $(this).data('name')
+    var name = $(this).data('name');
     shoppingCart.removeItemFromCartAll(name);
     displayCart();
-  })
+  });
 
   // Item count input
   $('.show-cart').on("change", ".item-count", function (event) {
@@ -189,7 +191,6 @@ $('.tab ul.tabs li a').on('click', function (g) {
     tab.find('.tab_content').find('div.tabs_item:eq(' + index + ')').slideDown();
     g.preventDefault();
 });
-
 // search function
 $('#search_field').on('keyup', function() {
   var value = $(this).val();
@@ -208,9 +209,53 @@ $('#search_field').on('keyup', function() {
       document.getElementById("not_found").innerHTML = " Product not found..";
       document.getElementById('not_found').style.display = 'block';
     }
-    
+
   });
   
 });
-       
+$("#buy").click(function () {
+//    console.log(cart); // Assuming `cart` is the array of cart elements
+     const sentData = {
+         id:userId, // user id is initialized the dashboard file
+         cart:cart
+     };
+     
+     //Send the AJAX POST request
+    $.ajax({
+        url: "buy",
+        type: "POST",
+        data: JSON.stringify(cart),
+        contentType: "application/json",
+        success: function (response) {
+            // Handle the success response from the server
+            showAlert('Success', 'Purchase successful', 'alert-success');
+            console.log("Purchase successful");
+            alert("Purchase successful");
+            // Add any additional logic or UI updates here
+        }, 
+        error: function (xhr, status, error) {
+            // Handle the error response from the server
+            showAlert('Error', 'Purchase failed: ' + xhr.responseText, 'alert-danger');
+            console.log("Purchase failed");
+            console.log(xhr.responseText);
+            // Add any error handling or UI updates here
+        }
+    });
+});
+    
+    function showAlert(type, message, alertClass) {
+        // Set the alert type, message, and class
+        $('#alertMessage').text(message);
+        $('#alertContainer').removeClass("d-none");
+        $('#alertContainer').addClass("d-block");
+        $('#alertContainer').removeClass('alert-success alert-danger').addClass(alertClass);
+
+        // Show the alert and hide after a few seconds
+        $('#alertContainer').slideDown();
+        setTimeout(function () {
+            $('#alertContainer').removeClass("d-block");
+            $('#alertContainer').addClass("d-none");
+            $('#alertContainer').slideUp();
+        }, 5000);
+    }
    });

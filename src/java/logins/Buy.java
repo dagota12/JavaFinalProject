@@ -14,6 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import java.sql.*;
+import java.math.BigDecimal;
+
+
+import java.time.LocalDate;
+import java.util.*;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import connection.DBConnection;
+import objects.CartItem;
 /**
  *
  * @author Dag
@@ -76,24 +87,86 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    
+    // Get the cart JSON from the request
+    BufferedReader reader = request.getReader();
+    StringBuilder jsonBuilder = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+        jsonBuilder.append(line);
     }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
+    String cartJson = jsonBuilder.toString();
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    // Convert the cart JSON to a List of CartItem objects
+    Gson gson = new Gson();
+    ArrayList<CartItem> cart = gson.fromJson(cartJson, new TypeToken<List<CartItem>>() {}.getType());
+
+    try (Connection connection = DBConnection.getConnection()) {
+        // Insert the order into the "orders" table
+        int orderId = insertOrderIntoOrdersTable(connection, request.getSession().getAttribute("user_name").toString());
+
+        // Insert each cart item into the "order_items" table
+        for (CartItem item : cart) {
+            insertCartItemIntoOrderItemsTable(connection, orderId, item);
+        }
+
+        System.out.println(cart);
+        // Send a response indicating the success of the operation
+        // response.getWriter().write("Order placed successfully!");
+        DBConnection.closeConnection();
+    } catch (SQLException e) {
+        // Handle the exception
+        e.printStackTrace();
+    }
+}
+
+private int insertOrderIntoOrdersTable(Connection connection, String customerId) {
+    System.out.println("inserting to orders table");
+    int orderId = -1;
+    try {
+        // Insert the order into the "orders" table
+        String insertOrderQuery = "INSERT INTO orders (customer_id, ordered_date, status) VALUES (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertOrderQuery,
+                Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, customerId);
+        preparedStatement.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+        preparedStatement.setString(3, "Pending");
+        preparedStatement.executeUpdate();
+
+        // Get the generated order ID
+        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            orderId = generatedKeys.getInt(1);
+        }
+    } catch (SQLException e) {
+        System.out.println("ERROR: inserting to orders table");
+        e.printStackTrace();
+        // Handle the exception
+    }
+    System.out.println("DONE inserting to orders table");
+    return orderId;
+}
+
+private void insertCartItemIntoOrderItemsTable(Connection connection, int orderId, CartItem item) {
+    System.out.println("inserting to orders-item table");
+    try {
+        // Insert the cart item into the "order_items" table
+        String insertCartItemQuery = "INSERT INTO ordered_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertCartItemQuery);
+        preparedStatement.setInt(1, orderId);
+        preparedStatement.setInt(2, item.getId());
+        preparedStatement.setInt(3, item.getCount());
+        preparedStatement.setBigDecimal(4, BigDecimal.valueOf(item.getPrice()));
+        preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+        System.out.println("ERROR: inserting to orders-item table");
+        e.printStackTrace();
+        // Handle the exception
+    }
+    System.out.println("DONE inserting to orders-item table");
+}
+
 
 }

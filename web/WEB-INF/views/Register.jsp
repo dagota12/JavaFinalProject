@@ -88,11 +88,11 @@
         
 
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <button type="submit" class="btn btn-primary btn-block mb-4">Register   </button>
         
         <!-- Register buttons -->
         <div class="text-center">
-          <p>Are you a member? <a href="dashboard">Login</a></p>
+          <p>Are you a member? <a href="/WebApplication1">Login</a></p>
         </div>
 
     </form>
