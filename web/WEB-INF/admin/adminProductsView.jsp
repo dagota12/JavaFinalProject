@@ -6,7 +6,10 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="connection.*"%>
 <%@ page import="java.sql.*"%>
-
+<% if (session.getAttribute("loggedIn") == null || (boolean) session.getAttribute("isAdmin") == false) {
+        response.sendRedirect("/WebApplication1/admin");
+        return;
+    }%>
 
 <div class="container"> 
     <div class="top_nav_right">

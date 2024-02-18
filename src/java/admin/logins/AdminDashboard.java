@@ -5,10 +5,13 @@
 package admin.logins;
 
 import DAO.ProductsDao;
+import connection.DBConnection;
+import connection.DatabaseUpdater;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -25,7 +28,7 @@ import objects.Product;
  *
  * @author DAGIM
  */
-@WebServlet(name = "AdminDashboard", urlPatterns = {"/admin/dashboard","/admin/logout"})
+@WebServlet(name = "AdminDashboard", urlPatterns = {"/admin/dashboard","/admin/logout","/admin/customers","/admin/customers/delete"})
 public class AdminDashboard extends HttpServlet {
 
     /**
@@ -69,7 +72,10 @@ public class AdminDashboard extends HttpServlet {
         String urlPattern = request.getServletPath();
         System.out.println(urlPattern);
         if (urlPattern.equals("/admin/logout")) {
-        processLogout(request,response);
+            processLogout(request,response);
+        }else if(urlPattern.equals("/admin/customers")){
+            processCustomerView(request,response);
+        
         }else{
             processLogin(request, response);
         }
@@ -87,7 +93,10 @@ public class AdminDashboard extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        processRequest(request, response);
+        String url = request.getServletPath();
+        if(url.equals("/admin/customers/delete")){
+            processCustomerDelete(request,response);
+        }
     }
     // login 
         private void processLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,6 +137,33 @@ public class AdminDashboard extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processCustomerView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/AdminCustomersView.jsp");
+        dispatcher.forward(request,response);
+    }
+
+private void processCustomerDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Connection connection = DBConnection.getConnection();
+    String id = request.getParameter("user_name");
+    String query = "DELETE FROM customers WHERE customer_id = ?";
+    List<Object> parameters = List.of(id);
+
+    try {
+        DatabaseUpdater.executeUpdate(query, parameters);
+
+        // Send a success response to the client
+        response.getWriter().write("Customer deleted successfully");
+        response.setStatus(HttpServletResponse.SC_OK);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Send an error response to the client
+        response.getWriter().write("Error deleting customer: " + e.getMessage());
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
+}
+
 
 
 

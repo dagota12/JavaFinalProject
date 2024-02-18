@@ -99,6 +99,7 @@ public class AdminLogin extends HttpServlet {
         try {
             String user_name = request.getParameter("name");
             String password = request.getParameter("password");
+            
             Admin customer = AdminDao.getAdmin(user_name, password);
             
             if(customer != null){

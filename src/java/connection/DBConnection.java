@@ -104,6 +104,22 @@ public class DBConnection {
        // closeConnection(); //close the connection
         return rs;
     }
+    //Creating universal method to query for inserting or updating information in mysql database
+    public static int doUpdateFromSqlQuery(String SqlQueryString) {
+        int i = 2;
+        try {
+            //Checking whether the connection is null or null
+            if (connection == null) {
+                getConnection();
+            }
+            //Querying the query
+            i = connection.createStatement().executeUpdate(SqlQueryString);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return i;
+    }        
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         DBConnection db = new DBConnection();
         
@@ -111,5 +127,8 @@ public class DBConnection {
         System.out.println(c);
 
        
-    }    
+    }
+    public static void renewConnection(){
+        connection = getConnection();
+    }
 }

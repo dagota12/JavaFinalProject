@@ -4,6 +4,7 @@
  */
 package admin.logins;
 
+import connection.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author DAGIM
@@ -81,7 +84,19 @@ public class adminOrderView extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            System.out.println("admin Aproving");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Connection connection = DBConnection.getConnection();
+            String query = "UPDATE orders SET status = 'Delivered' WHERE order_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            int affectd = statement.executeUpdate();
+            response.sendRedirect("/WebApplication1/admin/orders");
+        } catch (SQLException ex) {
+            Logger.getLogger(adminOrderView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**

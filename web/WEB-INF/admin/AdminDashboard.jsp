@@ -4,7 +4,7 @@
     Author     : Dagim
 --%>
 <% if (session.getAttribute("loggedIn") == null || (boolean) session.getAttribute("isAdmin") == false) {
-        response.sendRedirect("/WebApplication1");
+        response.sendRedirect("/WebApplication1/admin");
         return;
     }%>
 <%@ page import="connection.*"%>

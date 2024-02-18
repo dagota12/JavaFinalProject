@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/WebApplication1/admin/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/WebApplication1/admin/profile">Profile</a>
+                <a class="nav-link" href="/WebApplication1/admin/customers">customers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/WebApplication1/admin/orders">orders</a>
