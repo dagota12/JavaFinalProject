@@ -32,7 +32,8 @@ public class ProductsDao {
             float price = Math.round((float)result.getFloat("price"));
             String desc = result.getString("description");
             int id = result.getInt("product_id");
-            list.add(new Product(name,price,desc,id));          
+            String image = result.getString("image");
+            list.add(new Product(name,price,desc,id,image));          
         }
             statement.close();
             result.close();

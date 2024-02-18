@@ -82,8 +82,9 @@
 
 <div class="col">
    <div class="card h-100 shadow-sm">
-      <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
+      <img src="images/products/${product.getImage()}" class="card-img-top" alt="...">
       <div class="card-body">
+          
          <div class="clearfix mb-3">
             <span class="float-start badge rounded-pill bg-primary">${product.name}</span>
             <span class="float-end price-hp">${product.price}&euro;</span>

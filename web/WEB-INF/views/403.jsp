@@ -16,7 +16,7 @@
 
      <!-- Title -->
      <title>403 - Not Authorized</title>
-     <link href="boot/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+     <link href="/WebApplication1/boot/bootstrap.min.css" rel="stylesheet" type="text/css"/>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 </head>
 

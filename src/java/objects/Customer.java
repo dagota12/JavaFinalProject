@@ -10,12 +10,24 @@ import java.util.ArrayList;
  * @author Dag
  */
 public class Customer {
-
-    @Override
-    public String toString() {
-        return "Customer{" + "name=" + name + ", id=" + id + ", city=" + city + ", phone=" + phone + ", gender=" + gender + ", password=" + password + ", age=" + age + '}';
+    protected String name, id, city, phone, gender;
+    protected String password;
+    protected int age;
+    
+    public Customer(String name, String password){
+        this.password = password;
+        this.id = name;
     }
-
+    public Customer(String name, String id, String password, String city, String phone, String gender, int age) {
+        this.name = name;
+        this.id = id;
+        this.city = city;
+        this.phone = phone;
+        this.gender = gender;
+        this.password = password;
+        this.age = age;
+    }
+    
     public Customer(String name, String city, String phone, String gender, String password, int age) { 
         this.name = name;
         this.city = city;
@@ -51,24 +63,12 @@ public class Customer {
     public int getAge() {
         return age;
     }
+    @Override
+    public String toString() {
+        return "Customer{" + "name=" + name + ", id=" + id + ", city=" + city + ", phone=" + phone + ", gender=" + gender + ", password=" + password + ", age=" + age + '}';
+    }
 
-    public Customer(String name, String id, String password, String city, String phone, String gender, int age) {
-        this.name = name;
-        this.id = id;
-        this.city = city;
-        this.phone = phone;
-        this.gender = gender;
-        this.password = password;
-        this.age = age;
-    }
-    String name, id, city, phone, gender;
-    String password;
-    int age;
-    
-    public Customer(String name, String password){
-        this.password = password;
-        this.id = name;
-    }
+
 //    @Override
 //    public String toString(){
 //        return "Custumer: "+this.name+"["+this.password+"]";

@@ -28,8 +28,17 @@ public class Product {
     public double price;
     public String description;
     public int id;
+    public String image;
 
-    public Product(String name, double price, String description,int id) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Product(String name, double price, String description,int id,String image) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -43,7 +52,7 @@ public class Product {
         return "Product{" + "name=" + name + ", price=" + price + '}';
     }
     public static void main(String[] args) {
-        Product p = new Product("a",4,"jhk",3);
+        Product p = new Product("a",4,"jhk",3,"sf");
         System.out.println(p.id);
     }
 

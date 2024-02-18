@@ -88,6 +88,22 @@ public class DBConnection {
         }
         return cus;
     }
+        public static ResultSet getResultFromSqlQuery(String SqlQueryString) {
+        //Creating Resultset object
+        ResultSet rs = null;
+        try {
+            //Checking whether the connection is null or null
+            if (connection == null) {
+                getConnection();
+            }
+            //Querying the query
+            rs = connection.createStatement().executeQuery(SqlQueryString);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+       // closeConnection(); //close the connection
+        return rs;
+    }
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         DBConnection db = new DBConnection();
         

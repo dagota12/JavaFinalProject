@@ -8,7 +8,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <head>
         <title>shopping system</title>
         <meta charset="UTF-8">
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel ="stylesheet" href="css/bootstrapcss/bootstrap.min.css"/>
         <link href="css/style.css" rel="stylesheet"/>
@@ -57,8 +56,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
    
     <!--login form-->
     <div class="container w-50 text-dark" style="width: clamp(300px,50%,500px);min-width: 300px">
-        <h2 class="h2">please fill the fields to login</h2>
-        <form action="dashboard" class="p-0 p-md-4" method="POST">
+        <h2 class="h2">For Admin</h2>
+        <form action="admin" class="p-0 p-md-4" method="POST">
         <!-- Email input -->
         <div class="form-outline mb-4">
             <input type="text" id="name" name="name" class="form-control" required/>
