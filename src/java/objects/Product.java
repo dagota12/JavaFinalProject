@@ -43,6 +43,7 @@ public class Product {
         this.price = price;
         this.description = description;
         this.id = id;
+        this.image = image;
         
         
     }
