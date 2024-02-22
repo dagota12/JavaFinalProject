@@ -7,7 +7,7 @@
 <%@page import="connection.DBConnection"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if (session.getAttribute("loggedIn") == null || (boolean) session.getAttribute("isAdmin") == false) {
+<% if (session.getAttribute("loggedIn") == null || session.getAttribute("isAdmin") == null ) {
         response.sendRedirect("/WebApplication1/admin");
         return;
     }%>

@@ -63,7 +63,7 @@ public class adminOrderView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(); // Get the session without creating a new one
-        if (session.getAttribute("loggedIn") == null || (boolean) session.getAttribute("isAdmin") == false) {
+        if (session.getAttribute("loggedIn") == null || session.getAttribute("isAdmin") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/adminLogin.jsp");
             response.sendRedirect("/WebApplication1/admin");
         } else {
