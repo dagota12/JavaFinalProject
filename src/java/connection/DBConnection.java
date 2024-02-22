@@ -21,7 +21,7 @@ public class DBConnection {
     
     public DBConnection() throws ClassNotFoundException{
         name = "root";
-        password = "1234";
+        password = "admin123";
         url = "jdbc:mysql://localhost:3306/shoppingsystem";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -47,7 +47,7 @@ public class DBConnection {
     }
     public static synchronized Connection getConnection(){
         name = "root";
-        password = "1234";
+        password = "admin123";
         url = "jdbc:mysql://localhost:3306/shoppingsystem";
                 if (connection == null) {
             try {

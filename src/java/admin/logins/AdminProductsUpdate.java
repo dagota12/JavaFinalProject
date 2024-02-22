@@ -32,7 +32,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "AdminProductsUpdate", urlPatterns = {"/admin/products","/admin/products/add","/admin/products/edit"})
 public class AdminProductsUpdate extends HttpServlet {
-
+    
+    public static final String UPLOAD_DIRECTORY = "C:\\Users\\BitCom Tech\\Documents\\NetBeansProjects\\WebApplication1\\web\\images\\products\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -154,7 +155,6 @@ private void processProductAdd(HttpServletRequest request, HttpServletResponse r
                         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
                         String extension = item.getName().substring(item.getName().lastIndexOf("."));
                         fileName = timeStamp + extension;
-                        String UPLOAD_DIRECTORY = "C:\\Users\\davew\\Downloads\\Compressed\\JavaFinalProject-webapp_2\\JavaFinalProject-webapp\\web\\images\\products\\";
                         String filePath = UPLOAD_DIRECTORY + fileName;
                         File storeFile = new File(filePath);
 
@@ -244,7 +244,7 @@ private void processProductAdd(HttpServletRequest request, HttpServletResponse r
                         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
                         String extension = item.getName().substring(item.getName().lastIndexOf("."));
                         fileName = timeStamp + extension;
-                        String UPLOAD_DIRECTORY = "C:\\Users\\davew\\Downloads\\Compressed\\JavaFinalProject-webapp_2\\JavaFinalProject-webapp\\web\\images\\products\\";
+
                         String filePath = UPLOAD_DIRECTORY + fileName;
                         File storeFile = new File(filePath);
                         

@@ -40,7 +40,7 @@
         <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
             
-    <a class="navbar-brand" href="#" style="font-weight: 500;">Pick<span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
+    <a class="navbar-brand" href="/WebApplication1" style="font-weight: 500;">Pick<span class="text-success font-weight-bold" style="font-weight: 700;">UP</span></a>
               <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal"
                data-target="#staticBackdrop">
                 <i class="fas fa-shopping-cart total-count"></i> Cart
@@ -76,13 +76,13 @@
         <h4>Store</h4>
    <main>
    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-       <h1>ONce</h1>
+       <h1>Welcome to our shopping System</h1>
       <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
             <c:forEach var="product" items="${products}">
 
-<div class="col" style="max-height: 400px">
+<div class="col">
    <div class="card h-100 shadow-sm">
-      <img src="images/products/${product.getImage()}" class="card-img-top" style="max-height: 400px" alt="...">
+      <img src="images/products/${product.getImage()}" class="card-img-top" style="max-height: 400px;object-fit: cover;" alt="...">
       <div class="card-body">
           
          <div class="clearfix mb-3">

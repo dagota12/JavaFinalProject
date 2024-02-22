@@ -15,7 +15,7 @@
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
-          <a class="navbar-brand" href="#">LALA</a>
+          <a class="navbar-brand" href="/WebApplication1">Pick up</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,13 +23,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/WebApplication1">Home <span class="sr-only">(cur)</span></a>
+                <a class="nav-link" href="/WebApplication1">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link disabled" href="/WebApplication1/admin">admin</a>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
        <div class="container-fluid px-4 py-5 my-5 text-center">
         <div class="mb-4">
             <div>
-                <h2 class="display-2 fw-bold text-dark">Welcome TO<span class="text-primary"> qwerty   </span>Shop</h2>
+                <h2 class="display-2 fw-bold text-dark">Welcome TO<span class="text-primary"> our   </span>Shop</h2>
             </div>
         </div>
         <div id="main-bg" class=" container-fluid position-absolute lc-block d-grid gap-2 d-sm-flex justify-content-sm-center">

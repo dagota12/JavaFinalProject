@@ -21,9 +21,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
     </head>
     
-<body class="bg-light text-light container">
+<body class="bg-light text-light">
         <nav class="navbar navbar-expand-lg navbar-light px-3 bg-light">
-          <a class="navbar-brand" href="#">LALA</a>
+          <a class="navbar-brand" href="#">Pick up</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -31,14 +31,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(cur)</span></a>
+                <a class="nav-link" href="#">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/WebApplication1">customer</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
+              </li>              
             </ul>
           </div>
         </nav>
@@ -46,7 +47,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="container-fluid px-4 py-5 my-5 text-center">
         <div class="mb-4">
             <div>
-                <h2 class="display-2 fw-bold text-dark">Welcome TO<span class="text-primary"> qwerty   </span>Shop</h2>
+                <h2 class="display-2 fw-bold text-dark">Welcome TO<span class="text-primary"> our   </span>Shop</h2>
             </div>
         </div>
         <div id="main-bg" class=" container-fluid position-absolute lc-block d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -76,7 +77,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         
         <!-- Register buttons -->
         <div class="text-center">
-          <p>Not a member? <a href="register">Register</a></p>
+          <p>Not an admin? <a href="/WebApplication1">go to customers login</a></p>
         </div>
         <div class="text-center">
           <p>or admin <a href="admin">admin..</a></p>
