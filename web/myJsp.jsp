@@ -119,7 +119,7 @@
                   <table class="show-cart table">
         
                   </table>
-                  <div class="grand-total">Total price: ₹<span class="total-cart"></span></div>
+                  <div class="grand-total">Total price:(Etb) <span class="total-cart"></span></div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" id="buy">Buy</button>

@@ -139,15 +139,22 @@ private void processProductAdd(HttpServletRequest request, HttpServletResponse r
                         String fieldName = item.getFieldName();
                         String fieldValue = item.getString();
 
-                        if (fieldName.equals("productName")) {
-                            productName = fieldValue;
-                        } else if (fieldName.equals("price")) {
-                            System.out.println(fieldName);
-                            price = Double.parseDouble(fieldValue);
-                        } else if (fieldName.equals("quantity")) {
-                            quantity = Integer.parseInt(fieldValue);
-                        } else if (fieldName.equals("description")) {
-                            description = fieldValue;
+                        switch (fieldName) {
+                            case "productName":
+                                productName = fieldValue;
+                                break;
+                            case "price":
+                                System.out.println(fieldName);
+                                price = Double.parseDouble(fieldValue);
+                                break;
+                            case "quantity":
+                                quantity = Integer.parseInt(fieldValue);
+                                break;
+                            case "description":
+                                description = fieldValue;
+                                break;
+                            default:
+                                break;
                         }
                     } else {
                         // Process file upload

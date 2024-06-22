@@ -106,6 +106,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     try (Connection connection = DBConnection.getConnection()) {
         // Insert the order into the "orders" table
         int orderId = insertOrderIntoOrdersTable(connection, request.getSession().getAttribute("user_name").toString());
+        System.out.println("order id " + orderId);
 
         // Insert each cart item into the "order_items" table
         for (CartItem item : cart) {

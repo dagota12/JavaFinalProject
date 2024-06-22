@@ -81,7 +81,7 @@
                             <img class="img-fluid" src="${pageContext.request.contextPath}/images/products/<%=totalProduct.getString(7)%>" alt="alt"/>
                         </td>
                             <td class="invert">
-                                <form action="admin/products/edit" method="GET">
+                                <form action="/WebApplication1/admin/products/edit" method="GET">
                                     <input type="text"name="id" value="<%=totalProduct.getString(1)%>" hidden/>
                                     <input type="submit" class="btn-link" value="edit">
                                 </form>
